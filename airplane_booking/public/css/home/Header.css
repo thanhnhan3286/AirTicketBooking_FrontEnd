@@ -6,54 +6,43 @@ body {
 .navbar-nav .nav-link {
     color: white;
 }
-
-.login {
+.login{
     display: flex;
 
 }
-
-.login .nav-item {
-    text-align: end;
+.login .nav-item{
+    text-align:end;
 }
-
-@media (max-width: 680px) {
-    .login .nav-item {
+@media (max-width: 680px){
+    .login .nav-item{
         text-align: start;
     }
 }
-
-@media (max-width: 1000px) {
-    .login .nav-item {
+@media (max-width: 1000px){
+    .login .nav-item{
         text-align: start;
     }
 }
-
-header {
+header{
     background: #166987;
-    color: white;
+    color: white
 }
-
 .navbar .navbar-brand {
     color: #deaa1f
 }
-
 .navbar a:first-child {
     padding-left: 10px;
 }
-
-.dropdown-menu li:hover a {
+.dropdown-menu li:hover a{
     background-color: #daa310;
     color: white;
 }
-
 .dropdown-menu {
     background-color: #166987;
 }
-
 .dropdown-menu li a {
     color: white;
 }
-
-.navbar-nav li:hover a {
+.navbar-nav li:hover a{
     color: #daa310;
 }

@@ -1,0 +1,24 @@
+body {
+    font-family: "Diavlo", "sans-seriff";
+}
+.m-3 .col-3 .card img {
+    width: 100%;
+    height: 200px;
+}
+.m-3 .col-3 .card {
+    height: 370px;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card-body {
+    color: #166987;
+}
+.cheap {
+    color: #166987;
+
+}
+.buy {
+    background: #daa310;
+    color: white;
+}
