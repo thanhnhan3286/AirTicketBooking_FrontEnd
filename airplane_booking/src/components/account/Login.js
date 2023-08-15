@@ -6,15 +6,18 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+
 
 
 export function Login() {
     const navigate = useNavigate();
-    const [userInfo, setUserInfo] = useState({
-        token: '',
-        username: '',
-        role: ''
-    });
+    // const [userInfo, setUserInfo] = useState({
+    //     token: '',
+    //     username: '',
+    //     role: ''
+    // });
     // useEffect(() => {
     //     const hideURLBar = () => {
     //         window.scrollTo(0, 1);
@@ -71,21 +74,27 @@ export function Login() {
                             console.log("Token:", localStorage.token);
                             console.log("Username:", localStorage.username);
                             console.log("Role:", localStorage.role);
-                            setUserInfo({
-                                token: localStorage.getItem('role'),
-                                username: response.data.username,
-                                role: response.data.role
-                            });
+                            // setUserInfo({
+                            //     token: localStorage.getItem('role'),
+                            //     username: response.data.username,
+                            //     role: response.data.role
+                            // });
                         }
                         resetForm();
                         // Đăng nhập thành công, chuyển hướng hoặc thực hiện hành động khác
-                        // navigate("/");
+                        navigate("/");
                     } catch (e) {
                         // Xử lý lỗi đăng nhập
-                        toast.error(e.response.data);
+                        // toast.error(e.response.data);
+                        await Swal.fire({
+                            title: e.response.data,
+                            text: 'Sai mật khẩu hoặc email !',
+                            icon: "warning",
+                            timer: 2000
+                        })
                     } finally {
                         setSubmitting(false);
-                        console.log(userInfo);
+                        // console.log(userInfo);
                     }
                 }}
             >

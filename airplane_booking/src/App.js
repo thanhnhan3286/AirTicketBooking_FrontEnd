@@ -4,6 +4,7 @@ import {Login} from "./components/account/Login";
 import {Route, Routes} from "react-router";
 import "bootstrap/dist/css/bootstrap.css";
 import {SignUp} from "./components/account/SignUp";
+import {CheckCode} from "./components/account/CheckCode";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<Login/>}/>
                 <Route path={"/signup"} element={<SignUp/>}/>
+                <Route path={"/checkCode"} element={<CheckCode/>}/>
             </Routes>
         </>
     );
