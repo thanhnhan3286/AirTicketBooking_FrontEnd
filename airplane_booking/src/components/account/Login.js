@@ -49,7 +49,7 @@ export function Login() {
                         .required('Chưa nhập mật khẩu!!!')
                         .matches(/^(?=.*[A-Z])(?=.*[0-9]).{8,20}$/, 'Mật khẩu phải từ 8 ký tự và ít hơn 20 ký tự, có chứa ký tự in hoa và ký tự số'),
                 })}
-                onSubmit={async (values, {setSubmitting}) => {
+                onSubmit={async (values, {setSubmitting, resetForm}) => {
                     // console.log(values);
                     try {
                         // Gửi yêu cầu đăng nhập
@@ -72,12 +72,12 @@ export function Login() {
                             console.log("Username:", localStorage.username);
                             console.log("Role:", localStorage.role);
                             setUserInfo({
-                                token: localStorage.token,
+                                token: localStorage.getItem('role'),
                                 username: response.data.username,
                                 role: response.data.role
                             });
                         }
-
+                        resetForm();
                         // Đăng nhập thành công, chuyển hướng hoặc thực hiện hành động khác
                         // navigate("/");
                     } catch (e) {
@@ -100,7 +100,7 @@ export function Login() {
                             </h2>
                         </div>
                         <div className="content-agile2 bg-white">
-                            <div className="row" >
+                            <div className="row">
                                 <div
                                     className="col-md-4"
                                     style={{
@@ -123,7 +123,15 @@ export function Login() {
                                         required=""
                                     />
                                     {/*<p className="err-mes">Chưa nhập email</p>*/}
-                                    <ErrorMessage component="span" name="username" className="err-mes"/>
+                                    <div className="row">
+                                        <div className="col-1"/>
+                                        <div className="col-10">
+                                            <ErrorMessage component="span" name="username"
+                                                          className="err-mes"/>
+                                        </div>
+                                        <div className="col-1"/>
+                                    </div>
+
                                 </div>
                             </div>
                             <div className="row">
@@ -148,7 +156,14 @@ export function Login() {
                                         required=""
                                     />
                                     {/*<p className="err-mes">Chưa nhập mật khẩu</p>*/}
-                                    <ErrorMessage component="span" name="password" className="err-mes"/>
+                                    <div className="row">
+                                        <div className="col-1"/>
+                                        <div className="col-10">
+                                            <ErrorMessage component="span" name="password"
+                                                          className="err-mes"/>
+                                        </div>
+                                        <div className="col-1"/>
+                                    </div>
                                 </div>
                             </div>
                             <div className="row">
@@ -187,8 +202,9 @@ export function Login() {
                                             marginTop: "2%",
                                             // paddingLeft: "15%",
                                             backgroundColor: "rgb(6, 133, 170)",
-                                            color: "white"
-                                            // fontWeight: "revert"
+                                            color: "white",
+                                            // fontWeight: "bold",
+                                            fontSize: "18px"
                                         }}>
                                     Đăng Nhập
                                 </button>

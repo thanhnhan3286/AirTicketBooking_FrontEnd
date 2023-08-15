@@ -236,7 +236,7 @@ input#firstname, input#email, input#password1, input#password2, select#email {
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
-    font-family: 'Raleway', sans-serif;
+    /*font-family: 'Raleway', sans-serif;*/
     margin: 0 auto;
     display: block;
     outline: none;
@@ -465,7 +465,7 @@ p.copyright a:hover {
     color: red;
     text-align: right;
     padding-right: 10%;
-    margin: 0 10% 10px;
+    margin: 0 0 10px;
 }
 
 @media (max-width: 1024px) {
