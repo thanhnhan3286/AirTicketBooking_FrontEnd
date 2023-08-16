@@ -8,7 +8,7 @@ import axios from "axios";
 import {ToastContainer, toast} from "react-toastify";
 import {max} from "moment";
 import Swal from "sweetalert2";
-import CheckCode from './CheckCode';
+// import CheckCode from './CheckCode';
 
 export function SignUp() {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ export function SignUp() {
             <Formik
                 initialValues={{
                     nameCustomer: "",
-                    genderCustomer: "",
+                    genderCustomer: 2,
                     emailCustomer: "",
                     telCustomer: "",
                     addressCustomer: "",
@@ -46,9 +46,9 @@ export function SignUp() {
                         .max(50, 'Email tối đa 50 ký tự, ít nhất 12 ký tự.'),
                     telCustomer: yup.string().required('Không được để trống trường này!')
                         .matches(/^(\+84|0)[1-9][0-9]{8}$/, "Nhập theo định dạng +84xxxxxxxxx hoặc 0xxxxxxxxx với x là ký tự số."),
-                    nationalityCustomer: yup.number().required('Không được để trống trường này!')
-                        .min(1, 'Không được để trống trường này!')
-                        .max(10, 'Không được để trống trường này!'),
+                    nationalityCustomer: yup.string().required('Không được để trống trường này!')
+                       , // .min(1, 'Không được để trống trường này!')
+                        // .max(10, 'Không được để trống trường này!'),
                     idCardCustomer: yup.string().required('Không được để trống tường này!')
                         .matches(/^([A-Z][0-9]{6,12})|([0-9]{12})$/, "Nhập theo định dạng (7 ký tự đối với hộ chiếu và 12 ký tự đối với CCCD)."),
                     dateCustomer: yup.date().required('Không được để trống trường này!')
@@ -64,20 +64,30 @@ export function SignUp() {
                 onSubmit={async (values, {setSubmitting, resetForm}) => {
                     // setSubmitting(false);
                     console.log(values);
+                    values = {
+                    ...values,
+                        genderCustomer: +values.genderCustomer
+                    }
+                    console.log(values);
+
                     try {
                         // Gửi yêu cầu đăng ký
                         const response = await axios.post(
-                            "http://localhost:8080/api/account/signup",
-                            values
+                            "http://localhost:8080/api/account/signup",{
+                                ...values,
+                                genderCustomer: +values.genderCustomer
+                            }
+
                         );
-                        // Kiểm tra nếu response có chứa token
-                        if (response.ok) {
+                        // Kiểm tra response
+                        if (response.username != null) {
                             setUserName(response.data);
                         }
                         resetForm();
                         // Đăng ký thành công, chuyển hướng hoặc thực hiện hành động khác
-                        navigate("/");
-                        <CheckCode propData = {userName}/>;
+                        // navigate(`/checkCode/${userName}`);
+                        navigate(`/checkCode/${userName}`);
+                        // <CheckCode propData = {userName}/>;
                     } catch (e) {
                         // Xử lý lỗi đăng ký
                         // toast.error(e.response.data);
@@ -298,7 +308,7 @@ export function SignUp() {
                                             id="firstname"
                                             name="nameCustomer"
                                             placeholder="Nhập"
-                                            title="Please enter your First Name"
+                                            title="Vui lòng nhập họ và tên theo CCCD"
                                             required=""
                                         />
                                         <div className="row">
@@ -385,9 +395,9 @@ export function SignUp() {
                                             name="genderCustomer"
                                             // required=""
                                         >
-                                            <option value="2">-- Chọn --</option>
-                                            <option value="0">Nam</option>
-                                            <option value="1">Nữ</option>
+                                            <option value={2}>-- Chọn --</option>
+                                            <option value={0}>Nam</option>
+                                            <option value={1}>Nữ</option>
                                             {/*<option value="3">Khác</option>*/}
                                         </Field>
                                         <div className="row">
@@ -470,10 +480,9 @@ export function SignUp() {
                                             name="nationalityCustomer"
                                             // required=""
                                         >
-                                            <option value="0">-- Chọn --</option>
-                                            <option value="1">Việt Nam</option>
-                                            <option value="2">USA</option>
-                                            <option value="3">Japan</option>
+                                            <option value="Việt Nam">Việt Nam</option>
+                                            <option value="USA">USA</option>
+                                            <option value="Japan">Japan</option>
                                         </Field>
                                         <div className="row">
                                             <div className="col-1"/>

@@ -82,7 +82,7 @@ export function Login() {
                         }
                         resetForm();
                         // Đăng nhập thành công, chuyển hướng hoặc thực hiện hành động khác
-                        navigate("/");
+                        navigate("/signup");
                     } catch (e) {
                         // Xử lý lỗi đăng nhập
                         // toast.error(e.response.data);
